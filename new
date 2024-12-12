@@ -1,0 +1,60 @@
+refund_requests 
+- order_id 
+- status_id
+- reason
+- tracking_number
+- pdf_label
+- deliveryDate
+
+
+refund_request_item
+- refund_request_id
+- order_item_id
+
+
+
+case one: 
+refund one order_item (110)
+
+
+
+refund_request track_number pdf_label  status
+id   order_id
+1    33
+
+
+refund_request_item
+id  refund_request_id order_item_id
+1   1                 110
+
+
+
+case two 
+refund full order (7)
+
+refund_request track_number pdf_label  status
+id   order_id
+1    33
+
+
+refund_request_item 
+id  refund_request_id order_item_id
+1   1                 110
+1   1                 111
+1   1                 113
+1   1                 114
+1   1                 115
+
+
+case three 
+refund 2/5 items
+
+refund_request
+id   order_id track_number pdf_label status
+1    33
+
+
+refund_request_item
+id  refund_request_id order_item_id
+1   1                 110
+1   1                 111

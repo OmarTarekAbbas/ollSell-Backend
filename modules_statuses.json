@@ -1,0 +1,17 @@
+{
+    "Acl": true,
+    "CoreData": true,
+    "Setting": true,
+    "Basic": true,
+    "MasterCatalog": true,
+    "Order": true,
+    "Finance": true,
+    "Store": true,
+    "Report": true,
+    "Webhooks": true,
+    "Supplier": true,
+    "Subscription": true,
+    "Wms": true,
+    "Logistics": true,
+    "StoreIntegrations": true
+}

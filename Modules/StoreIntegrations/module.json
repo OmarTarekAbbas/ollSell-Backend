@@ -1,0 +1,11 @@
+{
+    "name": "StoreIntegrations",
+    "alias": "storeintegrations",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\StoreIntegrations\\Providers\\StoreIntegrationsServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,126 @@
+<?php
+
+namespace Modules\Order\Repositories;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Modules\Order\Entities\OrderStatus;
+use Modules\Basic\Repositories\BasicRepository;
+
+class OrderStatusRepository extends BasicRepository
+{
+
+    /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+        'order_id', 'status_id',
+
+    ];
+
+    /**
+     * Configure the Model
+     **/
+    public function model()
+    {
+        return OrderStatus::class;
+    }
+
+    /**
+     * Return searchable fields
+     *
+     * return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
+
+    /**
+     * It returns an array of the fields that are searchable in the relationship
+     *
+     * return The searchRelationShip array.
+     */
+    public function getFieldsRelationShipSearchable()
+    {
+        return $this->model->searchRelationShip;
+    }
+
+    /**
+     * It returns the translation key of the model
+     *
+     * return The translation key of the model.
+     */
+    public function translationKey()
+    {
+        return $this->model->translationKey();
+    }
+
+    /**
+     * It takes a request object, and returns a collection of models
+     *
+     * param Request request The request object
+     * param pagination true/false
+     * param perPage The number of items to return per page.
+     *
+     * return The return value is the result of the all() method.
+     */
+    public function findBy(Request $request, $pagination = false, $perPage = 10)
+    {
+        return $this->all($request->all(), pagination: $pagination, perPage: $perPage);
+    }
+
+    /**
+     * It returns a single record from the database, with all columns, and with the language column
+     * from the translation table
+     *
+     * param id The id of the record you want to find
+     *
+     * return The findOne method is returning the result of the find method.
+     */
+    public function findOne($id)
+    {
+        return $this->find($id, ['*']);
+    }
+
+    /**
+     * It saves the data to the database and uploads the image to the server
+     *
+     * param Request request The request object
+     * param id The id of the record to be updated.
+     *
+     * return The return value of the transaction closure.
+     */
+    public function save($request)
+    {
+        return DB::transaction(function () use ($request) {
+            return  $this->create($request->all());
+        });
+    }
+
+    /**
+     * It returns a list of all the active users.
+     *
+     * param Request request The request object
+     * param pagination true/false
+     * param perPage The number of items to show per page.
+     *
+     * return A collection of all the active users.
+     */
+    public function list(Request $request, $pagination = false, $perPage = 10)
+    {
+        return $this->all(search: $request->all(), orderBy: ['column' => 'id', 'order' => 'desc'], pagination: $pagination, perPage: $perPage);
+    }
+
+    /**
+     * @param $orderId
+     * @return mixed
+     */
+    public function getOrderHistory($orderId)
+    {
+        return OrderStatus::where('order_id', $orderId)
+            ->with('status')
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+}

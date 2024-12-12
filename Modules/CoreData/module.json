@@ -1,0 +1,11 @@
+{
+    "name": "CoreData",
+    "alias": "coredata",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CoreData\\Providers\\CoreDataServiceProvider"
+    ],
+    "files": []
+}

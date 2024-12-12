@@ -1,0 +1,11 @@
+{
+    "name": "MasterCatalog",
+    "alias": "mastercatalog",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\MasterCatalog\\Providers\\MasterCatalogServiceProvider"
+    ],
+    "files": []
+}
